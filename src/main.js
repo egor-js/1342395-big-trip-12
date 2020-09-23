@@ -1,13 +1,15 @@
-const EVENTS_QUANTITY = 3;
-
 import {createTripInfoTemplate} from "./view/trip-info";
 import {createTripViewControlsTemplate} from "./view/trip-view-controls";
 import {createEventsSortTemplate} from "./view/trip-events-sort";
 import {createNewEventWithDestinationTemplate} from "./view/create-event-with-destination";
+import {editEventTemplate} from "./view/edit-event";
 import {createTripDayTemplate} from "./view/trip-day";
 import {createEventItemTemplate} from "./view/event-item";
+import {createTripPoints, tripPointsMocks} from "./mock/trip-points";
 
-const render = (container, template, place) => {
+const EVENTS_QUANTITY = 3;
+
+const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
 };
 
@@ -20,15 +22,20 @@ const siteTripEventsElement = document.querySelector(`.trip-events`);
 render(siteTripMainElement, createTripInfoTemplate(), `afterbegin`);
 render(siteTripControlsElement, createTripViewControlsTemplate(), `afterbegin`);
 render(siteTripEventsElement, createEventsSortTemplate(), `afterbegin`);
-render(siteTripEventsElement, createNewEventWithDestinationTemplate(), `beforeend`);
+// render(siteTripEventsElement, createNewEventWithDestinationTemplate());
 
 
-render(siteTripEventsElement, createTripDayTemplate(), `beforeend`);
+createTripPoints(EVENTS_QUANTITY);
+console.log(tripPointsMocks);
+
+render(siteTripEventsElement, createTripDayTemplate());
 
 const siteTripDayElement = siteTripEventsElement.querySelector(`.trip-events__list`);
 
-for (let i = 0; i < EVENTS_QUANTITY; i++) {
+for (let i = 0; i < EVENTS_QUANTITY - 1; i++) {
 
-  render(siteTripDayElement, createEventItemTemplate(), `beforeend`);
+  render(siteTripDayElement, createEventItemTemplate(tripPointsMocks[i]));
 
 }
+
+render(siteTripDayElement, editEventTemplate(tripPointsMocks[EVENTS_QUANTITY - 1]));
