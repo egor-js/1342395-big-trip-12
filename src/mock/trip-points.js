@@ -11,64 +11,77 @@ const offersByPointType = {
   "Drive": [
     {
       "title": `Rent a car`,
+      "classname": `car`,
       "price": 200
     },
     {
       "title": `Eat in car`,
-      "price": 30
+      "classname": `eat`,
+      "price": 200
     },
   ],
   "Bus": [
     {
       "title": `Choose meal`,
+      "classname": `meal`,
       "price": 180
     },
     {
       "title": `Upgrade to comfort class`,
+      "classname": `comfort`,
       "price": 50
     },
   ],
   "Flight": [
     {
       "title": `Add luggage`,
+      "class": `luggage`,
       "price": 30
     },
     {
       "title": `Switch to comfort class`,
+      "classname": `comfort`,
       "price": 100
     },
     {
       "title": `Add meal`,
+      "classname": `meal`,
       "price": 15
     },
     {
       "title": `Choose seats`,
+      "classname": `seats`,
       "price": 5
     },
     {
       "title": `Travel by train`,
+      "classname": `train`,
       "price": 40
     },
   ],
   "Taxi": [
     {
       "title": `Order Uber`,
+      "classname": `uber`,
       "price": 20
     }
   ],
   "Check-in": [
     {
       "title": `Add breakfast`,
+      "classname": `breakfast`,
       "price": 50
     }
   ],
   "Sightseeing": [
     {
       "title": `Book tickets`,
+      "classname": `tickets`,
       "price": 40
     },
     {
       "title": `Lunch in city`,
+      "classname": `lunch`,
       "price": 30
     }
   ],
@@ -111,14 +124,14 @@ export const tripPointsMocks = [];
 
 export const createTripPoints = (EVENTS_QUANTITY) => {
   for (let i = 0; i < EVENTS_QUANTITY; i++) {
-    const randomType = pointTypes[getRandomInteger(pointTypes.length - 1)];
+    const type = pointTypes[getRandomInteger(pointTypes.length - 1)];
     tripPointsMocks.push({
-      "base_price": getRandomInteger(500, 2000),
+      "basePrice": getRandomInteger(500, 2000),
       "destination": destination[getRandomInteger(0, 2)],
       "id": i,
-      "is_favorite": Math.random() > 0.5,
-      "type": randomType,
-      "offers": offersByPointType[randomType],
+      "isFavorite": Math.random() > 0.5,
+      "type": type,
+      "offers": offersByPointType[type],
     });
 
   }

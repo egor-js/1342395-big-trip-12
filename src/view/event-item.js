@@ -1,6 +1,16 @@
+const createOfferMarkup = (title, price) => {
+  return (
+    `<li class="event__offer">
+      <span class="event__offer-title">${title}</span>
+      &plus;
+      &euro;&nbsp;<span class="event__offer-price">${price}</span>
+     </li>`
+  );
+};
+
 export const createEventItemTemplate = (event) => {
-  const { base_price, destination, id, is_favorite, type, offers}= event;
-  console.log(event);
+  const {basePrice, destination, type, offers} = event;
+  const offerMarkups = offers ? offers.map((it) => createOfferMarkup(it.title, it.price)).join(`\n`) : ``;
   return (
     `<li class="trip-events__item">
                   <div class="event">
@@ -19,16 +29,12 @@ export const createEventItemTemplate = (event) => {
                     </div>
 
                     <p class="event__price">
-                      &euro;&nbsp;<span class="event__price-value">20</span>
+                      &euro;&nbsp;<span class="event__price-value">${basePrice}</span>
                     </p>
 
                     <h4 class="visually-hidden">Offers:</h4>
                     <ul class="event__selected-offers">
-                      <li class="event__offer">
-                        <span class="event__offer-title">Order Uber</span>
-                        &plus;
-                        &euro;&nbsp;<span class="event__offer-price">20</span>
-                       </li>
+                      ${offerMarkups}
                     </ul>
 
                     <button class="event__rollup-btn" type="button">
