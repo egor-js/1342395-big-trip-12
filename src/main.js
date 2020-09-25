@@ -4,14 +4,14 @@ import {createEventsSortTemplate} from "./view/trip-events-sort";
 import {createNewEventWithDestinationTemplate} from "./view/create-event-with-destination";
 import {editEventTemplate} from "./view/edit-event";
 import {createTripDayTemplate} from "./view/trip-day";
+import TripDayComponent from "./view/trip-day-class";
 import {createEventItemTemplate} from "./view/event-item";
 import {createTripPoints, tripPointsMocks} from "./mock/trip-points";
+import {renderTemplate} from "./utils.js";
 
 const EVENTS_QUANTITY = 3;
 
-const render = (container, template, place = `beforeend`) => {
-  container.insertAdjacentHTML(place, template);
-};
+console.log(new TripDayComponent());
 
 const siteTripMainElement = document.querySelector(`.trip-main`);
 const siteTripControlsElement = siteTripMainElement.querySelector(`.trip-controls`);
@@ -19,23 +19,23 @@ const siteTripControlsElement = siteTripMainElement.querySelector(`.trip-control
 const siteTripEventsElement = document.querySelector(`.trip-events`);
 
 
-render(siteTripMainElement, createTripInfoTemplate(), `afterbegin`);
-render(siteTripControlsElement, createTripViewControlsTemplate(), `afterbegin`);
-render(siteTripEventsElement, createEventsSortTemplate(), `afterbegin`);
-// render(siteTripEventsElement, createNewEventWithDestinationTemplate());
+renderTemplate(siteTripMainElement, createTripInfoTemplate(), `afterbegin`);
+renderTemplate(siteTripControlsElement, createTripViewControlsTemplate(), `afterbegin`);
+renderTemplate(siteTripEventsElement, createEventsSortTemplate(), `afterbegin`);
 
 
 createTripPoints(EVENTS_QUANTITY);
 console.log(tripPointsMocks);
 
-render(siteTripEventsElement, createTripDayTemplate());
+// renderTemplate(siteTripEventsElement, createNewEventWithDestinationTemplate());
+renderTemplate(siteTripEventsElement, createTripDayTemplate());
 
 const siteTripDayElement = siteTripEventsElement.querySelector(`.trip-events__list`);
 
 for (let i = 0; i < EVENTS_QUANTITY - 1; i++) {
 
-  render(siteTripDayElement, createEventItemTemplate(tripPointsMocks[i]));
+  renderTemplate(siteTripDayElement, createEventItemTemplate(tripPointsMocks[i]));
 
 }
 
-render(siteTripDayElement, editEventTemplate(tripPointsMocks[EVENTS_QUANTITY - 1]));
+renderTemplate(siteTripDayElement, editEventTemplate(tripPointsMocks[EVENTS_QUANTITY - 1]));
