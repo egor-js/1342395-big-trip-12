@@ -7,11 +7,14 @@ import {createTripDayTemplate} from "./view/trip-day";
 import TripDayComponent from "./view/trip-day-class";
 import {createEventItemTemplate} from "./view/event-item";
 import {createTripPoints, tripPointsMocks} from "./mock/trip-points";
-import {renderTemplate} from "./utils.js";
+import { renderTemplate, renderElement, RenderPosition} from "./utils.js";
+import MenuComponent from "./view/menu";
 
 const EVENTS_QUANTITY = 3;
 
-console.log(new TripDayComponent());
+const MENU_TABS = [
+  `Table`, `Stats`
+];
 
 const siteTripMainElement = document.querySelector(`.trip-main`);
 const siteTripControlsElement = siteTripMainElement.querySelector(`.trip-controls`);
@@ -20,12 +23,13 @@ const siteTripEventsElement = document.querySelector(`.trip-events`);
 
 
 renderTemplate(siteTripMainElement, createTripInfoTemplate(), `afterbegin`);
-renderTemplate(siteTripControlsElement, createTripViewControlsTemplate(), `afterbegin`);
+
+renderElement(siteTripControlsElement, new MenuComponent(MENU_TABS).getElement(), RenderPosition.AFTERBEGIN);
+renderTemplate(siteTripControlsElement, createTripViewControlsTemplate());
 renderTemplate(siteTripEventsElement, createEventsSortTemplate(), `afterbegin`);
 
 
 createTripPoints(EVENTS_QUANTITY);
-console.log(tripPointsMocks);
 
 // renderTemplate(siteTripEventsElement, createNewEventWithDestinationTemplate());
 renderTemplate(siteTripEventsElement, createTripDayTemplate());
