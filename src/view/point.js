@@ -1,4 +1,5 @@
 import {createElement} from "../utils";
+import AbstractComponent from "../abstract-component";
 
 const createOfferMarkup = (title, price) => {
   return (
@@ -10,8 +11,9 @@ const createOfferMarkup = (title, price) => {
   );
 };
 
-export default class Point {
+export default class Point extends AbstractComponent {
   constructor(data) {
+    super();
     this._data = data;
     this._element = null;
   }
@@ -61,6 +63,14 @@ export default class Point {
     }
 
     return this._element;
+  }
+
+  setEditClickHandler(handler) {
+    this.getElement().querySelector(`.event__rollup-btn`).addEventListener(`click`, (evt) => {
+      console.log(`clik on button roll`);
+      evt.preventDefault();
+      handler();
+    });
   }
 
   removeElement() {

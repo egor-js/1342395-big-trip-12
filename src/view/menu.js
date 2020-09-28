@@ -1,6 +1,7 @@
 import {createElement} from "../utils";
+import AbstractComponent from "../abstract-component";
 
-export default class Menu {
+export default class Menu extends AbstractComponent  {
   constructor(menuItems) {
     this._menuItems = menuItems;
   }

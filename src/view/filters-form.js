@@ -1,6 +1,7 @@
 import {createElement} from "../utils";
+import AbstractComponent from "../abstract-component";
 
-export default class Form {
+export default class Form extends AbstractComponent {
   constructor() {
     this._element = null;
   }

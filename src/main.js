@@ -1,7 +1,5 @@
 import {createTripInfoTemplate} from "./view/trip-info";
-import {editEventTemplate} from "./view/edit-event";
 import {createTripDayTemplate} from "./view/trip-day";
-import TripDayComponent from "./view/trip-day-class";
 import {createTripPoints, tripPointsMocks} from "./mock/trip-points";
 import {renderTemplate, renderElement, RenderPosition} from "./utils.js";
 import MenuComponent from "./view/menu";
@@ -9,6 +7,8 @@ import FiltersFormComponent from "./view/filters-form";
 import FilterComponent from "./view/filter";
 import SortComponent from "./view/sort";
 import PointComponent from "./view/point";
+import PointEditComponent from "./view/point-edit";
+
 
 const EVENTS_QUANTITY = 3;
 
@@ -44,8 +44,9 @@ renderTemplate(siteTripEventsElement, createTripDayTemplate());
 
 const siteTripDayElement = siteTripEventsElement.querySelector(`.trip-events__list`);
 
-for (let i = 0; i < EVENTS_QUANTITY; i++) {
+for (let i = 0; i < EVENTS_QUANTITY - 1; i++) {
   renderElement(siteTripDayElement, new PointComponent(tripPointsMocks[i]).getElement(), RenderPosition.AFTERBEGIN);
 }
-
+// console.log(new PointEditComponent(tripPointsMocks[EVENTS_QUANTITY - 1]).getElement());
+// renderElement(siteTripDayElement, new PointEditComponent(tripPointsMocks[EVENTS_QUANTITY - 1]).getElement(), RenderPosition.BEFOREEND);
 // renderTemplate(siteTripDayElement, editEventTemplate(tripPointsMocks[EVENTS_QUANTITY - 1]));
