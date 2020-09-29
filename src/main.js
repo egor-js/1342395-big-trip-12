@@ -1,5 +1,4 @@
 import {createTripInfoTemplate} from "./view/trip-info";
-import {createTripDayTemplate} from "./view/trip-day";
 import {createTripPoints, tripPointsMocks} from "./mock/trip-points";
 import {renderTemplate, renderElement, RenderPosition} from "./utils.js";
 import MenuComponent from "./view/menu";
@@ -8,7 +7,8 @@ import FilterComponent from "./view/filter";
 import SortComponent from "./view/sort";
 import PointComponent from "./view/point";
 import PointEditComponent from "./view/point-edit";
-
+import BoardComponent from "./view/board";
+import DayComponent from "./view/trip-day";
 
 const EVENTS_QUANTITY = 3;
 
@@ -40,13 +40,20 @@ FILTERS_TABS.forEach((filter, index) => {
 renderElement(siteTripControlsElement, new MenuComponent(MENU_TABS).getElement(), RenderPosition.AFTERBEGIN);
 
 renderElement(siteTripEventsElement, new SortComponent(SORT_TYPES).getElement(), RenderPosition.AFTERBEGIN);
-renderTemplate(siteTripEventsElement, createTripDayTemplate());
+
+console.log(new BoardComponent().getElement());
+console.log(new DayComponent().getElement());
+
+renderElement(siteTripEventsElement, new BoardComponent().getElement(), RenderPosition.AFTERBEGIN);
+renderElement(siteTripEventsElement, new DayComponent().getElement(), RenderPosition.AFTEREND);
 
 const siteTripDayElement = siteTripEventsElement.querySelector(`.trip-events__list`);
 
-for (let i = 0; i < EVENTS_QUANTITY - 1; i++) {
-  renderElement(siteTripDayElement, new PointComponent(tripPointsMocks[i]).getElement(), RenderPosition.AFTERBEGIN);
+renderElement(siteTripEventsElement, new BoardComponent().getElement(), RenderPosition.AFTERBEGIN);
+
+const points = [];
+
+for (let i = 0; i < EVENTS_QUANTITY; i++) {
+  points[i] = (new PointComponent(tripPointsMocks[i]));
+  renderElement(siteTripDayElement, points[i].getElement(), RenderPosition.AFTERBEGIN);
 }
-// console.log(new PointEditComponent(tripPointsMocks[EVENTS_QUANTITY - 1]).getElement());
-// renderElement(siteTripDayElement, new PointEditComponent(tripPointsMocks[EVENTS_QUANTITY - 1]).getElement(), RenderPosition.BEFOREEND);
-// renderTemplate(siteTripDayElement, editEventTemplate(tripPointsMocks[EVENTS_QUANTITY - 1]));

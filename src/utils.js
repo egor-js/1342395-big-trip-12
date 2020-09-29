@@ -6,10 +6,9 @@ export const randomInt = (firstParam, secondParam) => {
   }
 };
 
-const RenderPosition = {
+export const RenderPosition = {
   AFTERBEGIN: `afterbegin`,
   BEFOREEND: `beforeend`,
-  AFTEREND: `afterend`
 };
 
 

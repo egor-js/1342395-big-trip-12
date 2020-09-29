@@ -1,18 +1,20 @@
-import {createElement} from "../utils";
+import {createElement} from "../utils.js";
 import AbstractComponent from "../abstract-component";
 
-export default class Form extends AbstractComponent {
+const createBoardTemplate = () => {
+  return (
+    `<ul class="trip-days"></ul>`
+  );
+};
+
+export default class Board extends AbstractComponent {
   constructor() {
     super();
     this._element = null;
   }
 
   getTemplate() {
-    return (
-      `<form class="trip-filters" action="#" method="get">
-        <button class="visually-hidden" type="submit">Accept filter</button>
-      </form>`
-    );
+    return createBoardTemplate();
   }
 
   getElement() {
